@@ -7,8 +7,11 @@ const port =  3000;
 
 app.use(morgan('combined'));
 
+app.set('views','./src/views');
+app.set('view','ejs');
+
 app.get('/', (req,res,next)=> {
-    res.send('Hello World 33333');
+    res.render('index');
 })
 
 app.listen(port , ()=>{
