@@ -1,22 +1,23 @@
 const express = require('express');
-const debug = require('debug');
-const morgan = require('morgan');
-const path = require('path');
+const productsRouter = require('./src/router/productsRouter');
 
 const app = express();
-const port =  4000;
-
-app.use(morgan('combined'));
-app.use(express.static(path.join(__dirname,'/public/')));
+const PORT =process.env.PORT || 4000;
 
 app.set('views','./src/views');
-app.set('view engine','ejs');
+app.set('view engine', 'ejs');
 
-app.get('/', (req,res,next)=> {
-    res.render('index');
+
+app.use('/products',productsRouter)
+
+app.get('/', (req,res)=> {
+    res.render('index', {username:'testssssss',customer:['naii','beam','nana']})
 })
 
 
-app.listen(port , ()=>{
-    debug('SERVER ON PORT '+ port);
+
+
+
+app.listen(PORT, ()=> {
+    console.log("SERVER RUN IS : "+PORT);
 })
